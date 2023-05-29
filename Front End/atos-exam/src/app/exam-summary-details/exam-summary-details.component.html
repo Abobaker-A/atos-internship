@@ -1,0 +1,11 @@
+<div class="container text-center py-5">
+    <div>
+      <ng-container *ngIf="examSummary">
+        <div class="bg-dark p-3 rounded-5">
+          <h2 class="display-2 fw-semibold">Exam Name : <span class="text-primary">{{examSummary.examName}}  </span>  </h2>
+          <h3 class="display-2 fw-semibold">Score: <span class="text-primary"> {{examSummary.score}} </span> </h3>
+          <h3 class="display-2 fw-semibold">Exam Status: <span [class.text-success]="examSummary.examStatus === 'PASSED'" [class.text-danger]="examSummary.examStatus !== 'PASSED'">{{examSummary.examStatus}}</span></h3>
+        </div>
+      </ng-container>
+  </div>
+</div>

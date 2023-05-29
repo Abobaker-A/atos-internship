@@ -1,0 +1,39 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<h1 class="text-center display-1 fw-bold " *ngIf="users.length==0">No Roles Available</h1>
+
+
+
+<div class="row gy-4 justify-content-center *ngIf="users.length >
+  <div class="col-md-4 " *ngFor="let user of users">
+    <div class="bg-dark p-3 rounded-4">
+      <div class="">
+        <h5 class="text-primary">{{ user.firstName }} {{ user.lastName }}</h5>
+        <p class=""><strong>Email : </strong>{{ user.email }}</p>
+      </div>
+      <button [routerLink]='["/userdetails",user.id]' class="btn btn-outline-info">View User Data</button>
+    </div>
+
+  </div>
+  <nav aria-label="Page navigation example" class="py-5">
+    <ul class="pagination justify-content-center text-black">
+      <li class="page-item">
+        <a (click)="DisplayAllUsers(page - 1)" class="page-link bg-transparent fw-semibold" *ngIf="page > 1">Back</a>
+      </li>
+      <li *ngFor="let pageNumber of pages" class="page-item">
+        <a (click)="DisplayAllUsers(pageNumber)" class="page-link bg-transparent fw-semibold" [class.active]="pageNumber === page">{{pageNumber}}</a>
+      </li>
+      <li class="page-item">
+        <a (click)="DisplayAllUsers(page + 1)" class="page-link bg-transparent fw-semibold" *ngIf="page < pages.length">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+
+

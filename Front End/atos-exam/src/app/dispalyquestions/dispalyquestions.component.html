@@ -1,0 +1,167 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+<section >
+  <form [formGroup]="filterForm" (ngSubmit)="getQuestionsfilter(1)">
+    <div class="container">
+      <div class="row ">
+        <div class="col-md-6">
+          <h4>Level:</h4>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="levelId" value="1"> Fresh
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="levelId" value="2"> Junior
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="levelId" value="3"> Senior
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="levelId" value="4"> Expert
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4>Category:</h4>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="categoryId" value="1"> Java
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="categoryId" value="2"> SAP
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="categoryId" value="3"> Dot Net
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="categoryId" value="4"> Java Script
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" justify-content-center d-flex py-4 ">
+        <button type="reset" class="btn btn-outline-danger px-4 me-4">Reset</button>
+        <button type="submit" class="btn btn-primary px-4 ms-3">Filter</button>
+      </div>
+    </div>
+  </form>
+
+
+
+  <div class="container py-5">
+    <div class="row  justify-content-center mb-3">
+      <div class="col-md-9">
+        <div class="row gy-3">
+          <h1 class="text-center display-1 fw-bold " *ngIf="questions.length==0">No Question Available</h1>
+          <div *ngFor="let question of questions" class="question col-md-6 col-xl-6" >
+
+            <div class="card shadow-0 border rounded-3 overflow-hidden " [ngClass]="{ 'selected': isSelected(question.id) }" (click)="toggleSelection(question.id)">
+              <div class="card-body bg-dark ">
+                <div class="row  ">
+                  <div class="col-md-8 col-lg-9 col-xl-9">
+                    <h5 class="pb-2">Question : <span class="d-block">{{question?.name}}</span> </h5>
+                    <div class="">
+                      <div class="d-flex justify-content-between">
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-danger">level : {{question?.levelId==1?"Fresh":question?.levelId==2?"Junior":question?.levelId==3?"Senior":question?.levelId==4?"Expert":null}}</p>
+                        <p class="text-success">CategoryId : {{question?.categoryId==1?"Java":question?.categoryId==2?"SAP":question?.categoryId==3?"DotNet":question?.categoryId==4?"Java Script":null}} </p>
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                    <h6 class="text-success">Mark : {{question?.mark}}</h6>
+                    <h6 class="">Created By : {{question?.createdBy}} </h6>
+                    <div class="d-flex flex-column mt-4">
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <button [routerLink]="['/questiondetails',question.id]"  data-id={{question.id}} class="btn fw-semibold btn-outline-info btn-sm mt-2" type="button">
+              View Question
+             </button>
+
+          </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center text-black">
+              <li class="page-item">
+                <a (click)="getQuestionsfilter(page - 1)" class="page-link bg-transparent fw-semibold" *ngIf="page > 1">Back</a>
+              </li>
+              <li *ngFor="let pageNumber of pages" class="page-item">
+                <a (click)="getQuestionsfilter(pageNumber)" class="page-link bg-transparent fw-semibold" [class.active]="pageNumber === page">{{pageNumber}}</a>
+              </li>
+              <li class="page-item">
+                <a (click)="getQuestionsfilter(page + 1)" class="page-link bg-transparent fw-semibold" *ngIf="page < pages.length">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+      <div class="col-3 formDefinitions">
+        <form [formGroup]="definitionForm" (ngSubmit)="adddefinition()">
+          <div>
+            <label for="name">Definition Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control">
+          </div>
+          <div>
+            <label for="duration">Duration</label>
+            <div class="position-relative">
+               <input type="number" id="duration" formControlName="duration" class="form-control">
+            <span class="position-absolute fw-bolder h6  end-0 top-50 me-5 translate-middle-y  text-black">Mins</span>
+            </div>
+
+          </div>
+          <div>
+            <label for="passingScore">Passing Score</label>
+            <div class="position-relative" >
+              <input type="number" id="passingScore" formControlName="passingScore" class="form-control" placeholder="Ex: 70">
+              <span class="position-absolute fw-bolder h4 end-0 top-50 me-5 translate-middle-y  text-black">%</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3" >Add Definition</button>
+        </form>
+        <div *ngFor="let examDefinition of examDefinitions " class="bg-dark p-4 rounded-3 mt-3">
+          <h5 ><span class="text-primary d-block">Exam Definition Name : </span> {{examDefinition?.name}}</h5>
+          <h6><span class="text-primary  d-block">Passing Score :   </span>  {{examDefinition?.passingScore}}      </h6>
+          <h6><span class="text-primary  d-block">Duration :   </span>  {{examDefinition?.duration}}      </h6>
+          <div >
+            <button [routerLink]="['/assignexam',examDefinition.id]" class="btn btn-success m-2">Assign Exam To Student</button>
+            <button (click)="deleteExamDefinition(examDefinition.id)" type="button" class="btn ms-2 btn-outline-danger" ><i class="fa-solid fa-trash"></i></button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</section>

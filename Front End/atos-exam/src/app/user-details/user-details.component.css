@@ -1,0 +1,4 @@
+.dropdown-menu {
+  max-height: 300px; /* set a maximum height */
+  overflow-y: auto; /* enable vertical scrolling */
+}

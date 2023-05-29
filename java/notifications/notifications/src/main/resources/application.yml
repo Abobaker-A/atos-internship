@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      database: atos
+      host: localhost
+      port: 27018
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+
+
+server:
+  port: 8083
+

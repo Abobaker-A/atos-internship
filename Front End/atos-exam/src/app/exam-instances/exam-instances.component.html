@@ -1,0 +1,13 @@
+<div class="row gy-3">
+  <div class="col-md-4" *ngFor="let exam of examInstances">
+    <div class="item bg-dark p-4 rounded-4" >
+      <h5>Exam ID : <span class="text-primary">{{exam.id}}</span> </h5>
+      <h5>Created By : <span class="text-primary">{{exam.createdBy}}</span> </h5>
+      <h5>Status : <span class="text-primary">{{exam.statusOfExam}}</span> </h5>
+      <div *ngIf="exam.statusOfExam === 'ASSIGNED'">
+        <button class="btn btn-sm btn-success" [routerLink]="['/startquiz/exam/',exam.id]">Take Exam</button>
+      </div>
+    </div>
+
+  </div>
+</div>

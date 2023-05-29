@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_IMPORT=/tmp/realm-export.json
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./realm-export.json:/tmp/realm-export.json
+    networks:
+      - keycloak-network
+
+  myapp:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - KEYCLOAK_URL=http://keycloak:8080/auth
+      - KEYCLOAK_REALM=atosExam
+      - KEYCLOAK_CLIENT_ID=AtosExam
+      - KEYCLOAK_CLIENT_SECRET=mysecret
+    ports:
+      - "8081:8081"
+    depends_on:
+      - keycloak
+    networks:
+      - keycloak-network
+
+networks:
+  keycloak-network:
+    driver: bridge

@@ -1,0 +1,135 @@
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<section class="h-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3 bg-dark">
+          <h2 class="display-1 text-primary fw-bold text-center">Atos Exam</h2>
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-2 pb-2 pb-md-0 mb-md-5 px-md-2">Add Question</h3>
+
+            <form [formGroup]="addQuestions" (ngSubmit)="addQuestion()" class="px-md-2">
+              <div class="form-outline mb-2">
+                <label class="form-label" for="name">Question</label>
+                <textarea formControlName="name" rows="3"   type="text" id="form3Example1q" class="form-control" maxlength="200"  placeholder="Question"></textarea>
+                <div *ngIf="addQuestions.get('name')?.errors && addQuestions.get('name')?.touched">
+                  <p *ngIf="addQuestions.get('name')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <div class="form-outline datepicker">
+                    <select class="form-select" formControlName="categoryId"  >
+                      <option value="0" disabled>Category</option>
+                      <option value="1">Java</option>
+                      <option value="2">SAP</option>
+                      <option value="3">Dot Net</option>
+                      <option value="4">Java Script</option>
+
+                    </select>
+                    <div *ngIf="addQuestions.get('name')?.errors && addQuestions.get('name')?.touched">
+                      <p *ngIf="addQuestions.get('name')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <select class="form-select" formControlName="levelId" >
+                    <option value="0" disabled>Level</option>
+                    <option value="1">Fresh</option>
+                    <option value="2">Junior</option>
+                    <option value="3">Senior</option>
+                    <option value="4">Expert</option>
+                  </select>
+                  <div *ngIf="addQuestions.get('name')?.errors && addQuestions.get('name')?.touched">
+                    <p *ngIf="addQuestions.get('name')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                  </div>                </div>
+              </div>
+              <div class="row mb-2 pb-2 pb-md-0 mb-md-5">
+                <div class="col-md-6">
+                  <div class="form-outline">
+                    <label class="form-label" for="mark">Mark</label>
+                    <input formControlName="mark"
+                      type="number"
+                      id="mark"
+                      class="form-control"
+                      placeholder="1 --> 5"
+                    />
+                  </div>
+                  <div *ngIf="addQuestions.get('mark')?.errors && addQuestions.get('mark')?.touched">
+                    <p *ngIf="addQuestions.get('mark')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-outline">
+                    <label class="form-label" for="expected_time">Time</label>
+                    <div class="position-relative">
+                      <input formControlName="expectedTime"
+                      type="number"
+                      id="expected_time"
+                      class="form-control"
+                      placeholder="Ex: 90"
+                    />
+                    <span class="text-black fw-bolder position-absolute end-0 top-50 translate-middle-y me-5">Seconds</span>
+
+                    </div>
+
+                  </div>
+                  <div *ngIf="addQuestions.get('expectedTime')?.errors && addQuestions.get('expectedTime')?.touched">
+                    <p *ngIf="addQuestions.get('expectedTime')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                  </div>
+                </div>
+              </div>
+              <div  class="form-outline mb-2">
+                <label class="form-label" for="created_by"
+                  >Created By</label
+                >
+                <input formControlName="createdBy" type="text" id="created_by" class="form-control" />
+                <div *ngIf="addQuestions.get('createdBy')?.errors && addQuestions.get('createdBy')?.touched">
+                  <p *ngIf="addQuestions.get('createdBy')?.getError('required') " class="alert p-0 text-danger" >This is Required</p>
+                </div>
+              </div>
+
+
+              <div formArrayName="answers" class="my-5">
+                <div class="py-2" *ngFor="let answer of answersArray.controls; index as i">
+                  <div [formGroupName]="i">
+                    <label>Answer {{i + 1}}:</label>
+                    <input class="form-control my-2" type="text" formControlName="name">
+                    <select  class="form-select w-25" formControlName="description" >
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn btn-sm btn-outline-warning" (click)="deleteAnswer()">Delete Last Answer</button>
+                  <button type="button" class="btn btn-sm btn-outline-info" (click)="addAnswer()">Add Answer</button>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between ">
+                <button type="reset" class="btn btn-danger btn-lg mb-1">
+                  Reset
+                </button>
+                <button [disabled]="addQuestions.invalid"  type="submit" class=" btn px-5 btn-success btn-lg mb-1">
+                  ADD
+                </button>
+
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

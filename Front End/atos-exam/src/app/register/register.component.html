@@ -1,0 +1,107 @@
+<section class="h-100  ">
+  <div class="container py-5 h-100 ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col ">
+        <div class="card card-registration my-4 ">
+          <div class="row g-0 align-items-center bg-black">
+            <div class="col-xl-6 d-none d-xl-block text-white bg-black ">
+              <img src="./../../assets/img4.webp" alt="Sample" class="img-fluid "  />
+            </div>
+            <div class="col-xl-6 text-white bg-black">
+              <div class="card-body p-md-5 ">
+                <h3 class="mb-5 text-uppercase">Registration Form</h3>
+
+
+                <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                <div class="form-outline mb-4">
+                <label class="form-label" for="first_name">First Name</label>
+                  <input   type="text" id="first_name" class="form-control form-control-lg " formControlName="firstName" placeholder='First Name' />
+
+                </div>
+                <div class="form-outline mb-4">
+                <label class="form-label" for="last_name">Last Name</label>
+                  <input  type="text" id="last_name" class="form-control form-control-lg " formControlName="lastName" placeholder='Last Name' />
+
+
+                </div>
+                <div class="form-outline mb-4">
+                <label class="form-label" for="birthDate">BirthDate</label>
+                  <input  type="date" id="birthDate" class="form-control form-control-lg " formControlName="birthDate" placeholder='Birth Date' />
+
+
+                </div>
+                <div class="form-outline mb-4">
+                <label class="form-label" for="email">E-Mail</label>
+                  <input  type="email" id="email" class="form-control form-control-lg " formControlName="email" placeholder='E-Mail' />
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="mobileNumber">Mobile Number</label>
+                    <input  type="text" id="mobileNumber" class="form-control form-control-lg " formControlName="mobileNumber" placeholder='Mobile Number' />
+                  </div>
+                  <div formGroupName="address">
+                    <div class="form-outline mb-4 d-flex">
+                      <div class="me-2">
+                        <label class="form-label" for="State">State</label>
+                        <input type="text" formControlName="state" id="State" class="form-control form-control-lg" />
+                      </div>
+                      <div class="ms-2">
+                        <label class="form-label" for="City">City</label>
+                        <input type="text" formControlName="city" id="City" class="form-control form-control-lg" />
+                      </div>
+                    </div>
+                    <div class="form-outline mb-4 d-flex" >
+                      <div class="me-2">
+                        <label class="form-label" for="Street">Street</label>
+                        <input type="text" formControlName="street" id="Street" class="form-control form-control-lg" />
+                      </div>
+                      <div class="ms-2">
+                        <label class="form-label" for="zipCode">Zip Code</label>
+                        <input type="text" formControlName="zipCode" id="zipCode" class="form-control form-control-lg" />
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2 ">
+
+                  <h5 class="mb-0 me-4">Gender: </h5>
+                  <div class="form-check form-check-inline mb-0 me-4">
+                    <input class="form-check-input" type="radio" formControlName="gender" name="gender" id="femaleGender"
+                      value="MALE" />
+                    <label class="form-check-label" for="femaleGender">Male</label>
+                  </div>
+
+                  <div class="form-check form-check-inline mb-0 me-4">
+                    <input class="form-check-input" type="radio" formControlName="gender" name="gender" id="maleGender"
+                      value="FEMALE" />
+                    <label class="form-check-label" for="maleGender">Female</label>
+                  </div>
+                </div>
+
+
+                <div class="form-outline mb-4">
+                <label class="form-label" for="password">Password</label>
+                <div class='position-relative'>
+                <input  type="password" formControlName="password" id="password" class="form-control form-control-lg " placeholder='Password' />
+                <button type="button" (click)="showPassword($event)" class="btn position-absolute end-0 top-50 translate-middle-y me-3"><i class="fa-solid text-black  fa-xl fa-eye-slash"></i>
+                </button>
+                </div>
+
+
+                </div>
+                <div class="d-flex justify-content-end pt-3">
+                  <button type="reset" class="btn btn-outline-danger btn-lg">Reset all</button>
+                  <button  class=" btn btn-info btn-lg ms-2  px-5" >Register</button>
+                </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

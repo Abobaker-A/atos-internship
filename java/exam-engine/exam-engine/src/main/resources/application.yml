@@ -1,0 +1,30 @@
+spring:
+  data:
+    mongodb:
+      database: atos
+      host: localhost
+      port: 27018
+  jackson:
+    time-zone: Africa/Cairo
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+
+
+app:
+  url: http://localhost:8082
+
+
+server:
+  port: 8082
+
+webclient:
+  users:
+    base-url: http://localhost:8081
+    byEmail-endpoint: /users/email/
+  questions:
+    base-url: http://localhost:8080
+    questions-endpoint: /questions/by-ids
+  frontEnd:
+      base-url: http://localhost:4200
+      take-exam: /startquiz/exam/

@@ -1,0 +1,47 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="container mt-5 text-center">
+  <div class="py-4">
+    <span class="text-success h3 text-bg-light p-3 rounded-3 fw-bolder">{{ formatTime(this.examTimeRemaining) }}</span>
+  </div>
+  <div class="d-flex py-5 justify-content-center row">
+    <div class="col-md-10 col-lg-10">
+      <div class="border bg-dark">
+        <div class="question p-3 border-bottom">
+          <div class="d-flex flex-row justify-content-between align-items-center mcq">
+            <h4>{{ examDefinitionName }}</h4>
+            <span class="text-bg-light p-3 rounded-3 h5 fw-bolder">{{ formatTime(this.questionTimeRemaining) }}</span>
+            <span>({{ currentQuestionIndex + 1 }} of {{ QuestionsView.length }})</span>
+          </div>
+        </div>
+        <div class="question bg-dark p-3 border-bottom">
+          <div class="d-flex flex-row align-items-center question-title py-3">
+            <h3 class="text-danger pe-3">Q{{ currentQuestionIndex + 1 }}:</h3>
+            <h5 class="mt-1 ml-2">{{ QuestionsView[currentQuestionIndex]?.name }}</h5>
+          </div>
+          <div *ngIf="QuestionsView[currentQuestionIndex]">
+            <div class="ps-5 py-1 form-check text-start" *ngFor="let answer of QuestionsView[currentQuestionIndex].answers | shuffle; let i = index">
+              <label class="form-check-label">
+                <input class="form-check-input py-2" type="radio" name="answer" [id]="answer.id" [value]="answer.id" [checked]="answer.isSelected" (click)="onRadioClick(answer)">
+                <span>{{ answer.name }}</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="container my-3 text-end" *ngIf="!isSubmitClicked">
+          <button (click)="goToNextQuestion()" class="btn btn-outline-info border-info" type="button" [hidden]="isLastQuestion()">
+            Next<i class="fa fa-angle-right ml-2"></i>
+          </button>
+            <button (click)="submitExam()" class="btn btn-outline-warning border-warning" [hidden]="!isLastQuestion()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

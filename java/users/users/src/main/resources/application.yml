@@ -1,0 +1,48 @@
+app:
+  url: http://localhost:8081/
+  jwtSecret: mySecretKey
+  jwtExpirationInMs: 3600000
+
+server:
+  port: 8081
+
+
+
+spring:
+  data:
+    mongodb:
+      database: atos
+      host: localhost
+      port: 27018
+  jackson:
+    time-zone: Africa/Cairo
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+
+
+debug: true
+
+#keycloak:
+#  auth-server-url: http://localhost:8085/auth
+#  realm: atosExam
+#  resource: atosExam-KeyClock
+#  public-client: true
+#  bearer-only: true
+#
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

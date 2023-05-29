@@ -1,0 +1,77 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="container py-5">
+  <div class="row gy-5 justify-content-center mb-3">
+    <div class="col-md-12 col-xl-10">
+
+      <div class="card shadow-0 border rounded-3 overflow-hidden">
+        <div class="card-body bg-dark ">
+          <div class="row">
+            <div class="col-md-8 col-lg-9 col-xl-9">
+              <h5 class="pb-2">{{questiondetails?.name}}</h5>
+              <div   class="d-flex pb-1 align-items-lg-center" *ngFor="let answer of questiondetails?.answers">
+                <span [ngClass]="{'btn-danger': answer?.isTrue === false}" class="btn btn-success">
+                  {{answer?.isTrue}}
+                </span>
+                <h6 data-id=answer?.id class="ps-3"> {{answer?.name}}</h6>
+                <button (click)="deleteAnswer(answer.id)" class="btn btn-sm  btn-outline-danger mx-3"><i class="fa-solid fa-trash"></i></button>
+              </div>
+
+
+
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 border-sm-start-none border-start">
+              <div class="">
+                <div class="d-flex justify-content-between">
+                <h6 class="text-success">Mark : {{questiondetails?.mark}}</h6>
+                  <p class="text-danger">Time : {{questiondetails?.expectedTime}} </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="text-danger">level :{{ questiondetails?.levelId==1?"Fresh":questiondetails?.levelId==2?"Junior":questiondetails?.levelId==3?"Senior":questiondetails?.levelId==4?"Expect":""}}</p>
+                  <p class="text-success">CategoryId : {{questiondetails?.categoryId==1?"Java":questiondetails?.categoryId==2?"SAP":questiondetails?.categoryId==3?"DotNet":questiondetails?.categoryId==4?"Java Script":""}} </p>
+                </div>
+
+
+              </div>
+              <h6 class="">Created By : {{questiondetails?.createdBy}} </h6>
+              <h6 class="">Created At : {{questiondetails?.createdAt}}  </h6>
+              <div class="d-flex flex-column mt-4">
+                <button (click)="deleteQuestion(questiondetails?.id)"  data-id={{questiondetails?.id}} class="btn fw-semibold btn-outline-danger btn-sm mt-2" type="button">
+                 Delete Question
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <form class="pt-5" [formGroup]="addAnswers" (ngSubmit)="addAnswer()">
+        <div class="mb-3">
+          <input type="text" formControlName="name" class="form-control" id="exampleFormControlInput1" placeholder="Add Answer">
+          <select  class="form-select mt-2 w-25" formControlName="isTrue" >
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn px-5 py-3 btn-outline-primary">Add</button>
+
+        </div>
+      </form>
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+
+

@@ -1,0 +1,5 @@
+@media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
+.selected {
+  background-color: #ff0000;
+  padding: .5rem;
+}

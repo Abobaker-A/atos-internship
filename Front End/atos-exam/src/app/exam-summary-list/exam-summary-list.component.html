@@ -1,0 +1,25 @@
+<div class="container py-5">
+  <h2 class="py-5 display-1 text-center">Exam Summary List</h2>
+  <div class="row gy-4">
+    <div *ngFor="let examSummary of examSummaryList" class="col-md-4">
+      <div class="bg-dark p-3 rounded-5">
+        <h2>Exam Name : <span class="text-primary"> {{examSummary.examName}}</span> </h2>
+        <h3>Score: <span class="text-primary">{{examSummary.score}}</span> </h3>
+        <h3>Exam Status: <span [class.text-success]="examSummary.examStatus === 'PASSED'" [class.text-danger]="examSummary.examStatus !== 'PASSED'">{{examSummary.examStatus}}</span></h3>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example" class="py-5">
+    <ul class="pagination justify-content-center text-black">
+      <li class="page-item">
+        <a (click)="getExamSummaryService(page - 1)" class="page-link bg-transparent fw-semibold" *ngIf="page > 1">Back</a>
+      </li>
+      <li *ngFor="let pageNumber of pages" class="page-item">
+        <a (click)="getExamSummaryService(pageNumber)" class="page-link bg-transparent fw-semibold" [class.active]="pageNumber === page">{{pageNumber}}</a>
+      </li>
+      <li class="page-item">
+        <a (click)="getExamSummaryService(page + 1)" class="page-link bg-transparent fw-semibold" *ngIf="page < pages.length">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
